@@ -1,16 +1,23 @@
 #!/bin/bash
 
-# README:
+##############################
+### Supervisor
+##############################
+
+echo -e "-------------------------------------------"
+echo -e ">>> ${0##*/}"
+
+# install supervisor
+
+echo "install ..."
+apt-get -y install supervisor > /dev/null
+
+echo "restart ..."
+service supervisor restart > /dev/null
+
+# README #########################################
+
 #  - https://www.digitalocean.com/community/tutorials/how-to-install-and-manage-supervisor-on-ubuntu-and-debian-vps
-
-echo -e "-------------------------------------------"
-echo -e "--- install-supervisor.sh -----------------"
-echo -e "-------------------------------------------"
-
-apt-get -y install supervisor
-service supervisor restart
-
-
 
 # touch /usr/local/bin/long.sh
 # chmod +x /usr/local/bin/long.sh
@@ -36,3 +43,5 @@ service supervisor restart
 # stderr_logfile=/var/log/long.err.log
 # stdout_logfile=/var/log/long.out.log
 # ' > /etc/supervisor/conf.d/long_script.conf
+
+##################################################
