@@ -31,7 +31,7 @@ Vagrant.configure(2) do |config|
 
   # Provisioning Script
   # --------------------
-  config.vm.provision "shell", path: "provision/bootstrap.sh"
+  config.vm.provision "shell", path: "bootstrap.sh"
 
   # Synced Folder
   # --------------------
