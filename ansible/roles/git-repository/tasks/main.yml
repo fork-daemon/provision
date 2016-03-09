@@ -1,0 +1,6 @@
+# file: roles/git-repository/tasks/main.yml
+---
+
+- name: upload git repositories
+  with_items: git_repository
+  git: repo={{item.repo}} dest={{item.dest}}

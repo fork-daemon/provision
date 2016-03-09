@@ -1,8 +1,1 @@
-.AppleDouble
-.DS_Store
-._*
-.project
-.settings
 .vagrant*
-www/*
-!www/index.php

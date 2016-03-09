@@ -1,0 +1,15 @@
+# file: playbook.yml
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+  roles:
+    - bootstrap
+    - utilities
+    - aliases
+    - git
+    - beanstalkd
+    - mysql
+    - redis
+    - git-repository

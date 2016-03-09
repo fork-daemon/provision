@@ -1,0 +1,11 @@
+# file: roles/beanstalkd/tasks/main.yml
+---
+
+- name: install beanstalkd
+  tags: beanstalkd
+  apt: name=beanstalkd state=present
+
+- name: setup beanstalkd
+  tags: beanstalkd
+  copy: src=beanstalkd dest=/etc/default/beanstalkd
+  notify: restart beanstalkd

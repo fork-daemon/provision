@@ -1,0 +1,6 @@
+# file: roles/beanstalkd/handlers/main.yml
+---
+
+- name: restart beanstalkd
+  tags: beanstalkd
+  service: name=beanstalkd state=restarted

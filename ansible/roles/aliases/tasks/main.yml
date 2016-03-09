@@ -1,0 +1,6 @@
+# file: roles/aliases/tasks/main.yml
+---
+
+- name: copy .bash_aliases
+  tags: aliases
+  copy: src=dot_bash_aliases dest=/home/vagrant/.bash_aliases force=no

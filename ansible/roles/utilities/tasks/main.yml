@@ -1,0 +1,14 @@
+# file: roles/utilities/tasks/main.yml
+---
+
+- name: install utilities
+  tags: utilities
+  apt: name={{ item }} state=latest
+  with_items:
+    - curl
+    - wget
+    - git-core
+    - unzip
+    - htop
+    - mc
+    - make

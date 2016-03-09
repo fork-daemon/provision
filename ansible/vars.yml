@@ -1,0 +1,32 @@
+# file: vars.yml
+---
+
+####################################################################
+# bootstrap
+bootstrap_locale: 'en_US.UTF-8'
+
+####################################################################
+# mysql
+mysql_root_password: 'password'
+# my.cnf
+mysql_datadir: '/var/lib/mysql'
+mysql_max_allowed_packet: '128M'
+mysql_character_set_server: 'utf8'
+mysql_collation_server: 'utf8_general_ci'
+innodb_file_per_table: 'innodb_file_per_table'
+mysql_user:
+  - { user: 'user', password: 'password', privileges: '*.*:ALL' }
+  - { user: 'user2', password: 'password2', privileges: '*.*:ALL' }
+mysql_db:
+  - { name: 'example_a' }
+  - { name: 'example_b' }
+
+####################################################################
+# git repositories
+git_repository:
+  - { repo: 'https://github.com/qandidate-labs/ansible-lamp-server.git', dest: '/repos/ansible-lamp-server' }
+  - { repo: 'https://github.com/ansible/ansible-examples.git', dest: '/repos/ansible-examples' }
+
+####################################################################
+# redis
+redis_port: 6379

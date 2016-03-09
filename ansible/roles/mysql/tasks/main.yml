@@ -1,0 +1,47 @@
+# file: roles/mysql/tasks/main.yml
+---
+
+- name: install required packages.
+  tags: mysql
+  apt: pkg={{ item }} state=installed force=yes
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-software-properties  # for "set the root password."
+    - python-pycurl               # for "set the root password."
+    - python-mysqldb              # for "set the root password."
+
+- name: configuration file my.cnf
+  tags: mysql
+  action: template src=roles/mysql/files/mysql-my-cnf.j2 dest=/etc/mysql/my.cnf
+  notify: restart mysql
+
+# Secure installation
+- name: set the root password.
+  tags: mysql
+  action: mysql_user user=root password={{ mysql_root_password }} host=localhost
+
+- name: config for easy access as root user
+  tags: mysql
+  action: template src=roles/mysql/files/mysql-root-my-cnf.j2 dest=/root/.my.cnf
+  notify: restart mysql
+
+- name: remove empty password users
+  tags: mysql
+  mysql_user: name='' password='' host=localhost priv=*.*:USAGE state=absent login_user=root login_password={{ mysql_root_password }}
+
+- name: remove empty password users
+  tags: mysql
+  mysql_user: name='' password='' host={{ ansible_fqdn }} priv=*.*:USAGE state=absent login_user=root login_password={{ mysql_root_password }}
+
+- name: remove the MySQL test database
+  tags: mysql
+  mysql_db: db=test state=absent login_user=root login_password={{ mysql_root_password }}
+
+- name: create database user
+  with_items: mysql_user
+  mysql_user: user={{item.user}} password={{item.password}} priv={{item.privileges}} state=present
+
+- name: create database
+  with_items: mysql_db
+  mysql_db: db={{item.name}} state=present

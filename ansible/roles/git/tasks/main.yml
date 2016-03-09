@@ -1,0 +1,11 @@
+# file: roles/git/tasks/main.yml
+---
+
+- name: install git base packages
+  tags: git
+  apt: pkg=git-core state=installed force=yes
+
+- name: copy .gitconfig
+  tags: git
+  copy: src=dot_gitconfig dest=/home/vagrant/.gitconfig force=no
+
